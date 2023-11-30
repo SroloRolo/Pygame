@@ -11,6 +11,8 @@ BG = pygame.transform.scale(pygame.image.load("bg.jpg"), (WIDTH, HEIGHT)) #creat
 PLAYER_WIDTH = 40
 PLAYER_HEIGHT = 60
 
+PLAYER_VEL = 3
+
 #loading the image into the game
 def draw(player):
     WIN.blit(BG,(0, 0))
@@ -23,7 +25,8 @@ def main():
     run = True
 
     #moving a character
-    player =pygame.Rect(500, HEIGHT - PLAYER_HEIGHT, PLAYER_WIDTH, PLAYER_HEIGHT)
+    player = pygame.Rect(200, HEIGHT - PLAYER_HEIGHT,
+                         PLAYER_WIDTH, PLAYER_HEIGHT)
 
     # closing the game
     while run:
@@ -31,6 +34,15 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
                 break
+
+        #getting all the keys that the user has pressed
+        key = pygame.key.get_pressed()
+        if key[pygame.K_LEFT]:
+            player.x -= PLAYER_VEL
+        elif key[pygame.K_RIGHT]:
+            player.x += PLAYER_VEL
+        elif key[pygame.K_UP]:
+            player.y -= PLAYER_VEL
 
         draw(player)
 
